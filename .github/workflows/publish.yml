@@ -1,4 +1,4 @@
-name: Publish Design Tokens to NPM
+name: Publish Design Tokens to GitHub Packages
 
 on:
   pull_request:
@@ -12,15 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org/'
-
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@barihari'
+          # CRITICAL FIX: Use the built-in runner token for authentication
+          token: ${{ secrets.GITHUB_TOKEN }}
+        
       - name: Publish Package
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # Note: The token is now passed in the setup step, so no env block is needed here.
