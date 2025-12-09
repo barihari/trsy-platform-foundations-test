@@ -1,5 +1,5 @@
 {
-    "name": "@barihari/treasury-foundations-test",
+    "name": "@barihari/treasury-foundations",
     "version": "0.0.0",
     "description": "Foundational Design Tokens for Treasury Platform, synced from Figma.",
     "main": "src/tokens/tailwind-theme.css",
