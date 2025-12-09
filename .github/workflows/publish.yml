@@ -21,11 +21,14 @@ jobs:
           node-version: '20'
           registry-url: 'https://npm.pkg.github.com'
           # This scope MUST match your package.json name scope
-          scope: '@barihari' 
+          scope: '@barihari'
+        # START OF ADDITION: Pass token to the setup step for robust authentication
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.SUPERNOVA }}
+        # END OF ADDITION
 
       - name: Publish Package
         run: npm publish
         env:
           # This variable provides the PAT for authentication.
-          # ${{ secrets.SUPERNOVA }} MUST match the secret name you create in Step 5.
-          NODE_AUTH_TOKEN: ${{ secrets.SUPERNOVA }} 
+          NODE_AUTH_TOKEN: ${{ secrets.SUPERNOVA }}
