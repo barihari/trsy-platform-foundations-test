@@ -1,4 +1,4 @@
-name: Publish Design Tokens to GitHub Packages
+name: Publish Design Tokens to NPM
 
 on:
   pull_request:
@@ -11,24 +11,16 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Allows checking out code
-      packages: write # Allows publishing to GitHub Packages
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://npm.pkg.github.com'
-          # This scope MUST match your package.json name scope
-          scope: '@barihari'
-        # START OF ADDITION: Pass token to the setup step for robust authentication
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.SUPERNOVA }}
-        # END OF ADDITION
+          registry-url: 'https://registry.npmjs.org/'
 
       - name: Publish Package
         run: npm publish
         env:
-          # This variable provides the PAT for authentication.
-          NODE_AUTH_TOKEN: ${{ secrets.SUPERNOVA }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
