@@ -1,0 +1,12 @@
+{
+  "name": "@barihari/treasury-foundations",
+  "version": "0.0.0",
+  "description": "Foundational Design Tokens for Treasury Platform, synced from Figma/Supernova.",
+  "main": "src/tokens/tailwind-theme.css",
+  "scripts": {
+    "build": "echo 'No build step required for simple CSS export' && exit 0"
+  },
+  "publishConfig": {
+    "@barihari:registry": "https://npm.pkg.github.com/"
+  }
+}
