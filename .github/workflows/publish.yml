@@ -10,20 +10,26 @@ jobs:
   publish:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    
+    # REQUIRED: Explicitly grant permissions to the runner's GITHUB_TOKEN
     permissions:
-      contents: write
-      packages: write
+      contents: write 
+      packages: write 
+    
     steps:
       - uses: actions/checkout@v4
+      
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          # CRITICAL: Configure the registry and scope
           registry-url: 'https://npm.pkg.github.com'
           scope: '@barihari'
-          # CRITICAL FIX: Use the built-in runner token for authentication
-          token: ${{ secrets.GITHUB_TOKEN }}
-        
+      
       - name: Publish Package
         run: npm publish
-        # Note: The token is now passed in the setup step, so no env block is needed here.
+        env:
+          # CRITICAL FIX: Pass the GITHUB_TOKEN directly to npm publish 
+          # This token is automatically generated and eliminates PAT errors.
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
