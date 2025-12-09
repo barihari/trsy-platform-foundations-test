@@ -32,4 +32,4 @@ jobs:
         env:
           # This token is automatically created by GitHub Actions for the repo
           # It must have the 'write:packages' scope set in your repo secrets (NPM_TOKEN)
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_Token }} 
